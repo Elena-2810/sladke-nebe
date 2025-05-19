@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <title>Statistiky | Sladké Nebe</title>
   <link rel="stylesheet" href="public/style.css">
+  <style>
+    
+  </style>
 </head>
 <body>
     <nav>
@@ -13,6 +16,18 @@
         <a href="o-nas.html">O nás</a>
         <a href="objednavka.html">Objednat</a>
         <a href="statistika.html">Statistiky</a>
+      <button class="button2" id="signInBtn">Sign In</button>
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Přihlášení</h3>
+    <form id="loginForm">
+      <input type="text" name="username" placeholder="Uživatelské jméno" required>
+      <input type="password" name="password" placeholder="Heslo" required>
+      <button type="submit">Přihlásit se</button>
+    </form>
+  </div> 
+</div> 
       </nav>
   <main>
     <h2>Co si naši zákazníci nejčastěji objednávají?</h2>
@@ -31,5 +46,24 @@
       });
   </script>
   <footer>&copy; 2025 Sladké Nebe.</footer>
+  <script>
+  const modal = document.getElementById("loginModal");
+  const btn = document.getElementById("signInBtn");
+  const span = document.querySelector(".close");
+
+  btn.onclick = () => {
+    modal.style.display = "block";
+  }
+
+  span.onclick = () => {
+    modal.style.display = "none";
+  }
+
+  window.onclick = (event) => {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
 </body>
 </html>

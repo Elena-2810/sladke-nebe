@@ -13,6 +13,19 @@
         <a href="o-nas.html">O nás</a>
         <a href="objednavka.html">Objednat</a>
         <a href="statistika.html">Statistiky</a>
+     <button class="button2" id="signInBtn">Sign In</button>
+
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Přihlášení</h3>
+    <form id="loginForm">
+      <input type="text" name="username" placeholder="Uživatelské jméno" required>
+      <input type="password" name="password" placeholder="Heslo" required>
+      <button type="submit">Přihlásit se</button>
+    </form>
+  </div>
+</div> 
       </nav>
   <main class="content">
     <h2>O naší cukrárně</h2>
@@ -20,5 +33,24 @@
     <img src="public/images/team-bakery.jpg" class="responsive" alt="tým cukrářek">
   </main>
   <footer>&copy; 2025 Sladké Nebe.</footer>
+  <script>
+  const modal = document.getElementById("loginModal");
+  const btn = document.getElementById("signInBtn");
+  const span = document.querySelector(".close");
+
+  btn.onclick = () => {
+    modal.style.display = "block";
+  }
+
+  span.onclick = () => {
+    modal.style.display = "none";
+  }
+
+  window.onclick = (event) => {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
 </body>
 </html>

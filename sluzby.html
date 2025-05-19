@@ -5,83 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nabídka - Sladké Nebe</title>
   <link rel="stylesheet" href="public/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: "Playfair Display", sans-serif;
       background: #fff8f2;
       margin: 0;
       padding: 0;
     }
-
     nav {
       background: #f58ca3;
       padding: 15px;
       text-align: center;
     }
-
-    nav a {
+    nav a, nav .button2 { 
       margin: 0 15px;
       color: white;
       text-decoration: none;
       font-weight: 600;
+      vertical-align: middle;
     }
-
-    .section {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 20px;
+    nav .button2 {
+        padding: 8px 15px; 
+        border-radius: 5px; 
+        background-color: #e0798c; 
+        border: none;
+        cursor: pointer;
     }
-
-    h2 {
-      text-align: center;
-      color: #5c3d2e;
+    nav .button2:hover {
+        background-color: #d16a7b;
     }
-
-    .accordion-item {
-      border-bottom: 1px solid #ddd;
-      margin-bottom: 10px;
-    }
-
-    .accordion-item h3 {
-      cursor: pointer;
-      background: #f7d6bf;
-      padding: 15px;
-      margin: 0;
-      font-size: 20px;
-      border-radius: 8px;
-    }
-
-    .accordion-item .content {
-      display: none;
-      padding: 15px;
-      background: #fff;
-    }
-
-    .product {
-      display: inline-block;
-      width: 200px;
-      margin-right: 20px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .product img {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    footer {
-      background: #f58ca3;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      margin-top: 40px;
-    }
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); }
+    .modal-content { background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 400px; border-radius: 5px; position: relative; text-align: left; }
+    .modal-content h3 { text-align: center; margin-top: 0; }
+    .modal-content input[type="text"], .modal-content input[type="password"], .modal-content button[type="submit"] { width: calc(100% - 22px); padding: 10px; margin-bottom: 10px; box-sizing: border-box; }
+    .close { color: #aaa; position: absolute; top: 10px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; }
+    .close:hover, .close:focus { color: black; text-decoration: none; }
+    .section { max-width: 1000px; margin: 40px auto; padding: 20px; }
+    h2.nase { text-align: center; color: #5c3d2e; }
+    .accordion-item { border-bottom: 1px solid #ddd; margin-bottom: 10px; }
+    .accordion-item h3 { cursor: pointer; background: #f7d6bf; padding: 15px; margin: 0; font-size: 20px; border-radius: 8px; }
+    .accordion-item .content { display: none; padding: 15px; background: #fff; text-align: center; /* Centrovanie produktov */ }
+    .product { display: inline-block; width: 220px; margin: 10px; padding: 10px; text-align: center; vertical-align: top; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 8px; background-color: #fdfdfd; }
+    .product img { width: 100%; max-width: 180px; height: auto; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 10px; }
+    .product p { min-height: 40px; margin-bottom: 10px; font-size: 1em; color: #5c3d2e; }
+    .buy-btn { font-family: "Playfair Display"; background-color: #f58ca3; color: white; border: none; padding: 10px 15px; text-align: center; display: inline-block; font-size: 14px; margin-top: 10px; cursor: pointer; border-radius: 5px, sans-serif; }
+    .buy-btn:hover { background-color: #e0798c; }
+    footer { background: #f58ca3; color: white; text-align: center; padding: 10px; margin-top: 40px; }
   </style>
 </head>
-<body>
+<body class="order-page2" style="background-image: url('public/images/333.png'); background-size: cover; background-repeat: no-repeat; background-position: right;">
 
   <nav>
     <a href="index.html">Domů</a>
@@ -90,42 +63,93 @@
     <a href="o-nas.html">O nás</a>
     <a href="objednavka.html">Objednat</a>
     <a href="statistika.html">Statistiky</a>
+    <button class="button2" id="signInBtn">Sign In</button>
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Přihlášení</h3>
+        <form id="loginForm">
+          <input type="text" name="username" placeholder="Uživatelské jméno" required>
+
+<input type="password" name="password" placeholder="Heslo" required>
+          <button type="submit">Přihlásit se</button>
+        </form>
+      </div>
+    </div>
   </nav>
 
+ <div class="overlay2">
   <main class="section">
-    <h2>Naše sladká nabídka</h2>
-
+    <h2 class="nase">Naše sladká nabídka</h2>
     <div class="accordion">
       <div class="accordion-item">
         <h3 onclick="toggleSection(this)">Dorty</h3>
         <div class="content">
           <div class="product">
-            <img src="public/images/cokoladovy-dort.jpg" alt="Čokoládový dort">
-            <p>Čokoládový dort</p>
+            <img class="product-img" src="public/images/photo_2025-05-17_14-46-46.jpg" alt="Čokoladový dort s višněmi">
+            <p>Čokoladový dort s višněmi</p>
+            <button class="buy-btn" data-product-name="Čokoladový dort s višněmi" data-product-image="public/images/photo_2025-05-17_14-46-46.jpg">Koupit</button>
           </div>
           <div class="product">
-            <img src="public/images/ovocny-dort.jpg" alt="Ovocný dort">
-            <p>Ovocný dort</p>
+            <img class="product-img" src="public/images/photo_2025-05-17_14-46-41.jpg" alt="Red velvet">
+            <p>Red velvet</p>
+            <button class="buy-btn" data-product-name="Red velvet" data-product-image="public/images/photo_2025-05-17_14-46-41.jpg">Koupit</button>
+          </div>
+           <div class="product">
+            <img  class="product-img" src="public/images/photo_2025-05-17_14-46-36.jpg" alt="Tiramisu">
+            <p>Tiramisu</p>
+            <button class="buy-btn" data-product-name="Tiramisu" data-product-image="public/images/photo_2025-05-17_14-46-36.jpg">Koupit</button>
+          </div>
+          <div class="product">
+            <img class="product-img" src="public/images/photo_2025-05-17_14-46-33.jpg" alt="Mrkový dort s ořechy">
+            <p>Mrkový dort s ořechy</p>
+            <button class="buy-btn" data-product-name="Mrkový dort s ořechy" data-product-image="public/images/photo_2025-05-17_14-46-33.jpg">Koupit</button>
           </div>
         </div>
       </div>
-
       <div class="accordion-item">
         <h3 onclick="toggleSection(this)">Sušenky</h3>
         <div class="content">
           <div class="product">
-            <img src="public/images/cookies.jpg" alt="Cookies">
+            <img class="product-img" src="public/images/photo_2025-05-17_15-17-55.jpg" alt="Cookies s čokoládou">
             <p>Cookies s čokoládou</p>
+            <button class="buy-btn" data-product-name="Cookies s čokoládou" data-product-image="public/images/photo_2025-05-17_15-17-55.jpg">Koupit</button>
+          </div>
+          <div class="product">
+            <img class="product-img" src="public/images/photo_2025-05-17_15-17-54.jpg" alt="Sušenky s předpovědí">
+            <p>Sušenky s předpovědí</p>
+            <button class="buy-btn" data-product-name="Sušenky s předpovědí" data-product-image="public/images/photo_2025-05-17_15-17-54.jpg">Koupit</button>
+          </div>
+          <div class="product">
+            <img class="product-img" src="public/images/photo_2025-05-17_15-17-52.jpg" alt="Linecké sušenky s marmeládou">
+            <p>Linecké sušenky s marmeládou</p>
+            <button class="buy-btn" data-product-name="Linecké sušenky s marmeládou" data-product-image="public/images/photo_2025-05-17_15-17-52.jpg">Koupit</button>
           </div>
         </div>
       </div>
 
       <div class="accordion-item">
-        <h3 onclick="toggleSection(this)">Muffiny</h3>
+        <h3 onclick="toggleSection(this)">Muffiny a cupcaky</h3>
         <div class="content">
           <div class="product">
-            <img src="public/images/bananovy-muffin.jpg" alt="Banánový muffin">
+            <img class="product-img" src="public/images/photo_2025-05-17_15-17-51.jpg" alt="Banánový muffin">
             <p>Banánový muffin</p>
+            <button class="buy-btn" data-product-name="Banánový muffin" data-product-image="public/images/photo_2025-05-17_15-17-51.jpg">Koupit</button>
+          </div>
+          <div class="product">
+            <img class="product-img" src="public/images/photo_2025-05-17_15-17-57.jpg" alt="Mrkové muffiny s ořechy">
+            <p>Mrkové muffiny s ořechy</p>
+            <button class="buy-btn" data-product-name="Mrkové muffiny s ořechy" data-product-image="public/images/photo_2025-05-17_15-17-57.jpg">Koupit</button>
+          </div>
+          <div class="product">
+            <img class="product-img" src="public/images/photo_2025-05-17_15-27-05.jpg" alt="Cupcaky s jahodovým krémem">
+            <p>Cupcaky s jahodovým krémem</p>
+            <button class="buy-btn" data-product-name="Cupcaky s jahodovým krémem" data-product-image="public/images/photo_2025-05-17_15-27-05.jpg">Koupit</button>
+          </div>
+          <div class="product">
+            <img class="product-img" src="public/images/photo_2025-05-17_15-17-49.jpg" alt="Citronové cupcaky">
+            <p>Citronové cupcaky</p>
+            <button class="buy-btn" data-product-name="Citronové cupcaky" data-product-image="public/images/photo_2025-05-17_15-17-49.jpg">Koupit</button>
           </div>
         </div>
       </div>
@@ -134,26 +158,72 @@
         <h3 onclick="toggleSection(this)">Perníčky</h3>
         <div class="content">
           <div class="product">
-            <img src="public/images/vanocni-pernik.jpg" alt="Vánoční perníček">
+            <img class="product-img" src="public/images/photo_2025-05-17_15-55-27.jpg" alt="Vánoční perníček">
             <p>Vánoční perníček</p>
+            <button class="buy-btn" data-product-name="Vánoční perníček" data-product-image="public/images/photo_2025-05-17_15-55-27.jpg">Koupit</button>
+          </div>
+           <div class="product">
+            <img class="product-img" src="public/images/photo_2025-05-17_15-55-26.jpg" alt="Velikonoční perníček">
+            <p>Velikonoční perníček</p>
+            <button class="buy-btn" data-product-name="Velikonoční perníček" data-product-image="public/images/photo_2025-05-17_15-55-26.jpg">Koupit</button>
+          </div>
+           <div class="product">
+            <img class="product-img" src="public/images/photo_2025-05-17_15-55-25.jpg" alt="Srdíčka z perníku">
+            <p>Srdíčka z perníku</p>
+            <button class="buy-btn" data-product-name="Srdíčka z perníku" data-product-image="public/images/photo_2025-05-17_15-55-25.jpg">Koupit</button>
+          </div>
+           <div class="product">
+            <img class="product-img" src="public/images/photo_2025-05-17_15-55-23.jpg" alt="Perníkové chaloupky 3D">
+            <p>Perníkové chaloupky 3D</p>
+            <button class="buy-btn" data-product-name="Perníkové chaloupky 3D" data-product-image="public/images/photo_2025-05-17_15-55-23.jpg">Koupit</button>
           </div>
         </div>
       </div>
     </div>
   </main>
-
+ </div>
   <footer>&copy; 2025 Sladké Nebe - Ručně a s láskou pečené.</footer>
 
   <script>
     function toggleSection(element) {
       const content = element.nextElementSibling;
       const isOpen = content.style.display === "block";
-      document.querySelectorAll('.accordion .content').forEach(el => el.style.display = "none");
-      if (!isOpen) {
+      if (isOpen) {
+        content.style.display = "none";
+      } else {
         content.style.display = "block";
       }
     }
-  </script>
 
+    
+    const buyButtons = document.querySelectorAll('.buy-btn');
+    buyButtons.forEach(button => {
+      button.addEventListener('click', (event) => {
+        const productName = event.target.dataset.productName;
+        const productImage = event.target.dataset.productImage;
+        if (productName && productImage) {
+          const selectedProduct = { name: productName, image: productImage };
+          localStorage.setItem('selectedProductToConfirm', JSON.stringify(selectedProduct));
+          window.location.href = 'potvrzeni.html'; 
+        } else {
+            console.error('Product name or image missing from data attributes.');
+        }
+      });
+    });
+  </script>
+  <script> 
+    const modal = document.getElementById("loginModal");
+    const btn = document.getElementById("signInBtn");
+    const span = document.querySelector("#loginModal .close");
+
+    if (btn && modal && span) {
+        btn.onclick = () => { modal.style.display = "block"; }
+        span.onclick = () => { modal.style.display = "none"; }
+        window.onclick = (event) => { if (event.target == modal) { modal.style.display = "none"; } }
+    } else {
+        if(!btn) console.error("signInBtn not found for modal on nabidka.html");
+        
+    }
+  </script>
 </body>
 </html>

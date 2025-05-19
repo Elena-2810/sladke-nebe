@@ -4,65 +4,162 @@
   <meta charset="UTF-8">
   <title>Objednávka | Sladké Nebe</title>
   <link rel="stylesheet" href="public/style.css">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: "Playfair Display", sans-serif; margin:0; padding:0; }
+    nav { background: #f58ca3; padding: 15px; text-align: center; margin-bottom: 20px;}
+    nav a, nav .button2 { margin: 0 15px; color: white; text-decoration: none; font-weight: 600; vertical-align: middle;}
+    nav .button2 { padding: 8px 15px; border-radius: 5px; background-color: #e0798c; border: none; cursor: pointer; }
+    nav .button2:hover { background-color: #d16a7b; }
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); }
+    .modal-content { background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 400px; border-radius: 5px; position: relative; text-align: left; }
+    .modal-content h3 { text-align: center; margin-top: 0; }
+    .modal-content input[type="text"], .modal-content input[type="password"], .modal-content button[type="submit"] { width: calc(100% - 22px); padding: 10px; margin-bottom: 10px; box-sizing: border-box; }
+    .close { color: #aaa; position: absolute; top: 10px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; }
+    .close:hover, .close:focus { color: black; text-decoration: none; }
+    main.contact { max-width: 600px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    main.contact h2.objednat { text-align:center; color: #5c3d2e; margin-bottom:20px; }
+    #orderedProductInfo { text-align: center; margin-bottom: 20px; padding: 15px; background-color: #f9f9f9; border:1px solid #eee; border-radius: 5px; }
+    #orderedProductInfo h4 { margin-top:0; color: #5c3d2e; }
+    #orderedProductImage { max-width: 100%; height: auto; max-height:200px; border-radius: 8px; margin-bottom:10px; }
+    #orderedProductName { font-size: 1.2em; font-weight: bold; color: #5c3d2e; }
+    #contact-form input, #contact-form textarea, #contact-form button { width: calc(100% - 22px); padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-family: 'Poppins', sans-serif; font-size: 1em;}
+    #contact-form textarea { resize: vertical; min-height: 100px; }
+    #contact-form button { background-color: #5cb85c; color: white; font-weight:bold; cursor:pointer; }
+    #contact-form button:hover { background-color: #4cae4c; }
+    #response-message { margin-top: 1rem; font-weight: bold; text-align:center; }
+    .error-message-order { color: red; font-weight: bold; text-align: center; margin-bottom: 20px; }
+    footer { background: #f58ca3; color: white; text-align: center; padding: 10px; margin-top: 40px; /* position: relative; bottom: 0; width: 100%; left:0; box-sizing: border-box; */ }
+  </style>
 </head>
-<body class="order-page"  class="hero2" style="background-image: url('public/images/Mask\ group.png')"></header>
-  <nav> 
+<body class="order-page" style="background-image: url('public/images/Beznazvu.png'); background-size: cover; background-repeat: no-repeat; background-position: right;">
+  <nav>
     <a href="index.html">Domů</a>
     <a href="sluzby.html">Nabídka</a>
     <a href="galerie.html">Galerie</a>
     <a href="o-nas.html">O nás</a>
     <a href="objednavka.html">Objednat</a>
     <a href="statistika.html">Statistiky</a>
+    <button class="button2" id="signInBtn">Sign In</button>
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Přihlášení</h3>
+        <form id="loginForm">
+          <input type="text" name="username" placeholder="Uživatelské jméno" required>
+          <input type="password" name="password" placeholder="Heslo" required>
+          <button type="submit">Přihlásit se</button>
+        </form>
+      </div>
+    </div>
   </nav>
+
   <main class="contact">
-    <h2>Objednejte si sladkost</h2>
-    <form id="contact-form">
-      <input name="name" placeholder="Jméno" required>
+
+
+<h2 class="objednat">Dokončení objednávky</h2>
+
+    <div id="orderedProductInfo">
+      <h4>Objednáváte:</h4>
+      <img id="orderedProductImage" src="" alt="Objednaný produkt"/>
+      <p id="orderedProductName">Načítání produktu...</p>
+    </div>
+
+    <form id="contact-form" style="display:none;"> <input name="name" placeholder="Jméno" required>
       <input name="email" type="email" placeholder="Email" required>
-      <select name="style" required>
-        <option value="">Vyberte typ sladkosti</option>
-        <option>Dort</option>
-        <option>Muffin</option>
-        <option>Sušenka</option>
-        <option>Perníček</option>
-        <option>Speciál</option>
-      </select>
-      <textarea name="message" placeholder="Vaše přání nebo poznámka" required></textarea>
-      <button type="submit">Odeslat objednávku</button>
+      <textarea name="message" placeholder="Vaše přání nebo poznámka (nepovinné)"></textarea> <button type="submit">Odeslat objednávku</button>
     </form>
     <p id="response-message" style="margin-top: 1rem; font-weight: bold;"></p>
   </main>
+
+  <footer>&copy; 2025 Sladké Nebe - Ručně a s láskou pečené.</footer>
+
   <script>
-    const form = document.getElementById('contact-form');
+    document.addEventListener('DOMContentLoaded', () => {
+      const productImageEl = document.getElementById('orderedProductImage');
+      const productNameEl = document.getElementById('orderedProductName');
+      const contactForm = document.getElementById('contact-form'); // Formulár pre kontaktné údaje
+      const orderedProductInfoDiv = document.getElementById('orderedProductInfo');
+
+      const productDataString = localStorage.getItem('confirmedOrderDetail');
+
+      if (productDataString) {
+        const product = JSON.parse(productDataString);
+        if (productImageEl) productImageEl.src = product.image;
+        if (productNameEl) productNameEl.textContent = product.name;
+        if (contactForm) contactForm.style.display = 'block'; // Zobraziť formulár až keď je produkt načítaný
+      } else {
+        if (orderedProductInfoDiv) orderedProductInfoDiv.innerHTML = '<p class="error-message-order">Žádný produkt nebyl potvrzen k objednávce. Prosím, <a href="nabidka.html">vyberte produkt z nabídky</a>.</p>';
+        if (contactForm) contactForm.style.display = 'none';
+      }
+    });
+
+    // Odoslanie formulára objednávky
+    const orderForm = document.getElementById('contact-form');
     const responseMessage = document.getElementById('response-message');
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(form));
+    if (orderForm && responseMessage) {
+      orderForm.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-      fetch('http://localhost:3000/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      })
-      .then(res => res.json())
-      .then(result => {
-        if (result.success) {
-          responseMessage.textContent = result.message;'Děkujeme za objednávku!';
-          responseMessage.style.color = 'green';
-          form.reset();
+        const formData = new FormData(orderForm);
+        const data = Object.fromEntries(formData.entries());
+
+        const confirmedProductString = localStorage.getItem('confirmedOrderDetail');
+        if (confirmedProductString) {
+          data.orderedProduct = JSON.parse(confirmedProductString); // Pridanie detailov produktu
         } else {
-          responseMessage.textContent = result.error; 'Došlo k chybě při odeslání.';
+          responseMessage.textContent = 'Chyba: Detaily produktu nebyly nalezeny. Objednávka nemohla být odeslána.';
           responseMessage.style.color = 'red';
+          return; // Zastaviť odoslanie
         }
-      })
-      .catch(() => {
-        responseMessage.textContent = 'Došlo k chybě při odeslání.';
-        responseMessage.style.color = 'red';
+        
+        fetch('http://localhost:3000/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+        .then(res => {
+            if (!res.ok) { return res.json().then(err => { throw err; }); }
+            return res.json();
+        })
+        .then(result => {
+          if (result.success) {
+            responseMessage.textContent = result.message || 'Děkujeme za objednávku!';
+            responseMessage.style.color = 'green';
+            orderForm.reset();
+            localStorage.removeItem('confirmedOrderDetail'); // Vyčistiť po úspešnej objednávke
+            localStorage.removeItem('selectedProductToConfirm'); // Aj tento pre istotu
+            // Aktualizovať zobrazenie produktu, alebo presmerovať
+            document.getElementById('orderedProductInfo').innerHTML = '<h4>Objednávka byla úspěšně odeslána!</h4>';
+            orderForm.style.display = 'none';
+          } else {
+            responseMessage.textContent = result.error ||'Došlo k chybě při odeslání.';
+            responseMessage.style.color = 'red';
+          }
+        })
+        .catch((error) => {
+          console.error('Fetch error:', error);
+          responseMessage.textContent = error.error || 'Došlo k kritické chybě při odeslání.';
+
+
+responseMessage.style.color = 'red';
+        });
       });
-    });
+    }
   </script>
-  <footer>&copy; 2025 Sladké Nebe.</footer>
+  <script> // Login Modal Script
+    const modal = document.getElementById("loginModal");
+    const btn = document.getElementById("signInBtn");
+    const span = document.querySelector("#loginModal .close");
+
+    if (btn && modal && span) {
+        btn.onclick = () => { modal.style.display = "block"; }
+        span.onclick = () => { modal.style.display = "none"; }
+        window.onclick = (event) => { if (event.target == modal) { modal.style.display = "none"; } }
+    } else {
+        // console.error("Modal elements not found on objednavka.html");
+    }
+  </script>
 </body>
 </html>
